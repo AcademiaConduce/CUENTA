@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#004c99">
+  <title>CONDUCE | Datos para transferencia</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --azul: #004c99;
+      --azul-2: #006dcc;
+      --azul-claro: #eaf4ff;
+      --texto: #172033;
+      --gris: #667085;
+      --borde: #e2e8f0;
+      --blanco: #ffffff;
+      --fondo: #f4f8fc;
+      --verde: #16834b;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(0, 108, 204, .13), transparent 32%),
+        linear-gradient(180deg, #eef6ff 0%, var(--fondo) 48%, #ffffff 100%);
+      color: var(--texto);
+      display: flex;
+      justify-content: center;
+      padding: 28px 16px 40px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .card {
+      background: var(--blanco);
+      border: 1px solid rgba(0, 76, 153, .10);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(0, 52, 104, .12);
+    }
+
+    .header {
+      background: linear-gradient(135deg, #003d7a, var(--azul), #0879d1);
+      color: white;
+      padding: 30px 26px 28px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      border: 35px solid rgba(255,255,255,.07);
+      right: -75px;
+      top: -80px;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      font-size: 31px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      margin-top: 6px;
+      font-size: 15px;
+      opacity: .88;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .notice {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      background: var(--azul-claro);
+      border: 1px solid #d5e9ff;
+      border-radius: 15px;
+      padding: 14px;
+      margin-bottom: 20px;
+      color: #174b7a;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .notice-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      color: var(--gris);
+      text-transform: uppercase;
+      margin: 20px 2px 10px;
+    }
+
+    .info-list {
+      border: 1px solid var(--borde);
+      border-radius: 17px;
+      overflow: hidden;
+      background: white;
+    }
+
+    .row {
+      padding: 15px 15px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 5px;
+    }
+
+    .value-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .value {
+      flex: 1;
+      min-width: 0;
+      font-size: 16px;
+      font-weight: 650;
+      color: var(--texto);
+      overflow-wrap: anywhere;
+    }
+
+    .account-number {
+      letter-spacing: 1px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .copy-btn {
+      flex: 0 0 auto;
+      border: 1px solid #cbdff2;
+      background: #f7fbff;
+      color: var(--azul);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 12px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--azul-claro);
+      border-color: #a8cfee;
+      transform: translateY(-1px);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-btn.copied {
+      color: var(--verde);
+      border-color: #b8e3cb;
+      background: #f1fbf5;
+    }
+
+    .actions {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .action {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 14px 16px;
+      font-size: 14px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .18s ease;
+      text-decoration: none;
+      text-align: center;
+    }
+
+    .action-primary {
+      background: var(--azul);
+      color: white;
+      box-shadow: 0 7px 18px rgba(0,76,153,.18);
+    }
+
+    .action-primary:hover {
+      background: #003d7a;
+      transform: translateY(-1px);
+    }
+
+    .action-secondary {
+      background: #f2f6fa;
+      color: #26435f;
+      border: 1px solid var(--borde);
+    }
+
+    .footer {
+      text-align: center;
+      color: #8492a3;
+      font-size: 11px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translate(-50%, 20px);
+      background: #172033;
+      color: white;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 650;
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      box-shadow: 0 8px 25px rgba(0,0,0,.18);
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    @media (max-width: 430px) {
+      body {
+        padding: 12px 10px 28px;
+      }
+
+      .header {
+        padding: 26px 21px 24px;
+      }
+
+      .content {
+        padding: 18px;
+      }
+
+      .brand {
+        font-size: 28px;
+      }
+
+      .value {
+        font-size: 15px;
+      }
+
+      .copy-btn {
+        padding: 8px 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+    <section class="card">
+
+      <header class="header">
+        <div class="brand">CONDUCE</div>
+        <div class="subtitle">Datos para realizar tu transferencia</div>
+      </header>
+
+      <div class="content">
+
+        <div class="notice">
+          <div class="notice-icon">💳</div>
+          <div>
+            Utiliza estos datos para realizar tu transferencia.
+            Verifica el titular y el número de cuenta antes de confirmar.
+          </div>
+        </div>
+
+        <div class="section-title">Información bancaria</div>
+
+        <div class="info-list">
+
+          <div class="row">
+            <span class="label">Banco</span>
+            <div class="value-line">
+              <span class="value">Banco Hipotecario</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Tipo de transferencia</span>
+            <div class="value-line">
+              <span class="value">Transfer 365</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Titular</span>
+            <div class="value-line">
+              <span class="value">Julio César Lazo Montecino</span>
+              <button class="copy-btn" onclick="copiar('Julio César Lazo Montecino', this)">Copiar</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Tipo de persona</span>
+            <div class="value-line">
+              <span class="value">Persona natural</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Tipo de cuenta</span>
+            <div class="value-line">
+              <span class="value">Ahorro</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Número de cuenta</span>
+            <div class="value-line">
+              <span class="value account-number">01620054808</span>
+              <button class="copy-btn" onclick="copiar('01620054808', this)">Copiar</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Moneda</span>
+            <div class="value-line">
+              <span class="value">USD — Dólares estadounidenses</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <span class="label">Correo electrónico</span>
+            <div class="value-line">
+              <span class="value">academiaconduce@gmail.com</span>
+              <button class="copy-btn" onclick="copiar('academiaconduce@gmail.com', this)">Copiar</button>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="actions">
+          <button class="action action-primary" onclick="copiarTodos()">
+            📋 Copiar todos los datos
+          </button>
+
+        </div>
+
+        <div class="footer">
+          CONDUCE · Información bancaria<br>
+          Verifica los datos antes de realizar la transferencia.
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast">Copiado correctamente</div>
+
+  <script>
+    function mostrarToast(mensaje) {
+      const toast = document.getElementById("toast");
+      toast.textContent = mensaje;
+      toast.classList.add("show");
+
+      setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    async function copiar(texto, boton) {
+      try {
+        await navigator.clipboard.writeText(texto);
+
+        const original = boton.textContent;
+        boton.textContent = "✓ Copiado";
+        boton.classList.add("copied");
+
+        mostrarToast("Copiado al portapapeles");
+
+        setTimeout(() => {
+          boton.textContent = original;
+          boton.classList.remove("copied");
+        }, 1600);
+
+      } catch (error) {
+        // Compatibilidad con algunos navegadores antiguos
+        const area = document.createElement("textarea");
+        area.value = texto;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+
+        mostrarToast("Copiado al portapapeles");
+      }
+    }
+
+    async function copiarTodos() {
+      const datos =
+`Banco: Banco Hipotecario
+Tipo de transferencia: Transfer 365
+Titular: Julio César Lazo Montecino
+Tipo de persona: Persona natural
+Tipo de cuenta: Ahorro
+Número de cuenta: 01620054808
+Moneda: USD
+Correo: academiaconduce@gmail.com`;
+
+      try {
+        await navigator.clipboard.writeText(datos);
+        mostrarToast("Todos los datos fueron copiados");
+      } catch (error) {
+        const area = document.createElement("textarea");
+        area.value = datos;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+
+        mostrarToast("Todos los datos fueron copiados");
+      }
+    }
+  </script>
+</body>
+</html>
